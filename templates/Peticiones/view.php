@@ -45,7 +45,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Firmantes') ?></th>
-                    <td><?= $this->Number->format($peticione->firmantes) ?></td>
+                    <td><?= $this->Number->format($peticione->firmantes) ?> <?= $this->Html->link(__('Firmar'), ['action' => 'firmar', $peticione->id]) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Created') ?></th>

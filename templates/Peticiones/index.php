@@ -28,14 +28,16 @@
                 <tr>
                     <td><?= $this->Number->format($peticione->id) ?></td>
                     <td><?= h($peticione->titulo) ?></td>
-                    <td><?= $this->Number->format($peticione->firmantes) ?></td>
+                    <td><?= $this->Number->format($peticione->firmantes) ?> </td>
                     <td><?= h($peticione->estado) ?></td>
                     <td><?= $peticione->has('categoria') ? $this->Html->link($peticione->categoria->id, ['controller' => 'Categorias', 'action' => 'view', $peticione->categoria->id]) : '' ?></td>
                     <td><?= $peticione->has('user') ? $this->Html->link($peticione->user->name, ['controller' => 'Users', 'action' => 'view', $peticione->user->id]) : '' ?></td>
                     <td><?= h($peticione->created) ?></td>
                     <td><?= h($peticione->updated) ?></td>
-                    <td><?= $this->Html->image('/webroot/files/PeticioneS/photo/'.$peticione->photo, ['alt' => 'CakePHP']);?></td>                    <td class="actions">
+                    <td><?= $this->Html->image('/webroot/files/PeticioneS/photo/'.$peticione->photo, ['alt' => 'CakePHP']);?></td>                    
+                    <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $peticione->id]) ?>
+                        <?= $this->Html->link(__('Firmar'), ['action' => 'firmar', $peticione->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $peticione->id]) ?>
                         <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $peticione->id], ['confirm' => __('Are you sure you want to delete # {0}?', $peticione->id)]) ?>
                     </td>

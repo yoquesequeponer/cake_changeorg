@@ -35,22 +35,36 @@ class PeticionesController extends AppController
 
     public function admin()
     {
+        if(($this->Authentication->getResult()->getData()->rol)=='admin'){
         $id = $this->Authentication->getResult()->getData()->id;
         $this->paginate = [
             'contain' => ['Categorias'],
         ];
         $peticiones = $this->paginate($this->Peticiones);
         $this->set(compact('peticiones'));
+    }else{
+        $this->redirect(['controller' => 'Pages', 'action' => '']);
+    }
+
     }
 
     public function cambiarEstado($id)
     {
+        
         $peticione = $this->Peticiones->get($id, [
             'contain' => ['Categorias', 'Users'],
         ]);
         $peticione->estado = 'aceptada';
         $this->Peticiones->save($peticione);
         $this->redirect(["controller" => "peticiones", 'action' => 'admin']);
+        
+    }
+
+    public function firmar($id){
+        $firmantes = $this->Peticiones->get($id);
+        $firmantes->firmantes = $firmantes->firmantes + 1;
+        $this->Peticiones->save($firmantes);
+        return $this->redirect(["controller"=>"peticiones",'action' => 'view',$id]);
     }
 
     /**
